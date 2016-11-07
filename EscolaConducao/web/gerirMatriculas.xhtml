@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Matriculas</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <ui:define name="dado">
+        <f:metadata>
+            <f:event listener="#{alunosController.carregar()}" type="preRenderView"/>
+        </f:metadata>
+    </ui:define>
+    <h:body>    
+        <p:layout fullPage="true">
+           <p:layoutUnit position="north" header="CENTRO DE FORMAÇÃO PROFISSIONAL" resizable="false" closable="false" collapsible="false"/>
+            
+           <p:layoutUnit position="center" header="Matriculas de Alunos" resizable="false" closable="false" collapsible="false">
+               <center>
+               <p:fieldset legend="Matriculas">
+                   <h:panelGrid columns="2">
+                   <p:outputLabel value="Nome do Aluno"/>
+                   <h:selectOneMenu value="#{alunosController.aluno.nome}" >
+                       <f:selectItem itemValue="" itemLabel="Selecione um dos Alunos"/>
+                       <f:selectItems value="#{alunosController.listarAlunos}" var="alun" itemValue="#{alun}" itemLabel="#{alun.nome}"/>
+                   </h:selectOneMenu>
+                   
+                   <p:outputLabel value="Categoria"/>
+                   <h:selectOneMenu value="#{categoriaController}" >
+                       <f:selectItem itemValue="" itemLabel="Selecione um dos Cursos"/>
+                       <f:selectItems value="#{categoriaController.listarCategoria}" var="cate" itemValue="#{cate}" itemLabel="#{cate.descricao}"/>
+                   </h:selectOneMenu>
+                   
+                   <p:outputLabel value="Preço"/>
+                   <h:selectOneMenu value="#{categoriaController}" >
+                       <f:selectItem itemValue="" itemLabel="Selecione um dos Preços"/>
+                       <f:selectItems value="#{categoriaController.listarCategoria}" var="cate" itemValue="#{cate}" itemLabel="#{cate.preco}"/>
+                   </h:selectOneMenu>
+                   
+                   <p:outputLabel value="Tipo de Pagamento"/>
+                   <h:selectOneMenu value="#{tiposPagamentoController}" >
+                       <f:selectItem itemValue="" itemLabel="Selecione o Tipo de Pagamento"/>
+                       <f:selectItems value="#{tiposPagamentoController.listarTiposPagamento}" var="tpag" itemValue="#{tpag}" itemLabel="#{tpag.descricao}"/>
+                   </h:selectOneMenu>
+                   
+                   <p:outputLabel value="Valor Entregue"/>
+                   <h:inputText value=""/>
+                   
+                   <p:outputLabel value="Horário"/>
+                   <h:selectOneMenu value="#{horariosController}" >
+                       <f:selectItem itemValue="" itemLabel="Selecione o Horário"/>
+                       <f:selectItems value="#{horariosController.listarHorarios}" var="hora" itemValue="#{hora}" itemLabel="#{hora.descricao}"/>
+                   </h:selectOneMenu>
+                   
+                   
+                   </h:panelGrid>
+                   
+                   
+                   <p:commandButton value="Salvar" actionListener="#{funcionariosController.adicionar()}"/>
+                   <p:commandButton value="Alterar"/>
+               </p:fieldset>
+                   
+                   
+                   </center>
+           </p:layoutUnit>
+            <p:layoutUnit position="east" header="OPÇÕES" resizable="false" closable="false" collapsible="false">
+                <h:form>
+                <p:panelMenu>
+                    <p:submenu label="ALUNOS">
+                        <p:menuitem value="Cadastrar Alunos" outcome="gerirAlunos.xhtml"/>
+                        <p:menuitem value="Lista de Alunos" outcome="homeAlunos.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="FUNCIONARIOS">
+                        <p:menuitem value="Cadastrar Funcionarios" outcome="gerirFuncionarios.xhtml"/>
+                        <p:menuitem value="Lista de Funcionarios" outcome="homeFuncionarios.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="UTILIZADORES">
+                        <p:menuitem value="Cadastrar Utilizadores" outcome="gerirUtilizadores.xhtml"/>
+                        <p:menuitem value="Lista de Utilizadores" outcome="homeUtilizadores.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="MATRICULAS">
+                        <p:menuitem value="Matricular Alunos" outcome="gerirMatriculas.xhtml"/>
+                        <p:menuitem value="Lista de Matriculas"/>
+                    </p:submenu>
+                    <p:submenu label="HOME/SAIR">
+                        <p:menuitem value="Menu Principal" action="#{loginController.votarMenuPrincipal()}"/>
+                        <p:menuitem value="SAIR" style="color: red" action="#{loginController.sair()}"/>
+                    </p:submenu>
+                    
+                </p:panelMenu>
+                </h:form>
+            </p:layoutUnit>
+        </p:layout>
+        
+          
+    </h:body>
+</html>

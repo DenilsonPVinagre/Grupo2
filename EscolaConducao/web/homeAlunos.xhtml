@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Estudantes</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <ui:define name="dado">
+        <f:metadata>
+            <f:event listener="#{alunosController.carregar()}" type="preRenderView"/>
+        </f:metadata>
+    </ui:define>
+    <h:body>
+        <h:form>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" header="ESCOLA DE CONDUÇÃO" resizable="false" closable="false" collapsible="false"/>
+                
+                 <p:layoutUnit position="center" header="ESTUDANTES CADASTRADOS" resizable="false" closable="false" collapsible="false">
+                     <center>
+                
+            <p:dataTable value="#{alunosController.listarAlunos}" var="aluno">
+                <p:column headerText="NOME">
+                    <h:outputText value="#{aluno.nome}"/>
+                </p:column>
+                <p:column headerText="TELEFONE" style="width: 10%">
+                    <h:outputText value="#{aluno.telefone}"/>
+                </p:column>
+                <p:column headerText="E-MAIL">
+                    <h:outputText value="#{aluno.email}"/>
+                </p:column>
+                <p:column headerText="DATA DE NASCIMENTO" style="width: 12%">
+                    <h:outputText value="#{aluno.datanascimento}"/>
+                </p:column>
+                
+                <p:column headerText="EDITAR" style="width: 11%">
+                    <p:commandButton value="EDITAR" action="#{alunosController.prepararAlterarAlunos()}"/>
+                </p:column>
+                
+                <p:column headerText="EXCLUIR" style="width: 11%">
+                    <p:commandButton value="EXCLUIR" action="#{alunosController.excluirAlunos()}"/>
+                </p:column>
+                
+            </p:dataTable>
+      
+              </center>
+                 </p:layoutUnit>
+
+                <p:layoutUnit position="east" header="OPÇÕES" resizable="false" closable="false" collapsible="false">
+                
+                <p:panelMenu>
+                    <p:submenu label="ALUNOS">
+                        <p:menuitem value="Cadastrar Alunos" outcome="gerirAlunos.xhtnl"/>
+                        <p:menuitem value="Lista de Alunos" outcome="homeAlunos.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="FUNCIONARIOS">
+                        <p:menuitem value="Cadastrar Funcionarios" outcome="gerirFuncionarios.xhtml"/>
+                        <p:menuitem value="Lista de Funcionarios" outcome="homeFuncionarios.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="UTILIZADORES">
+                        <p:menuitem value="Cadastrar Utilizadores" outcome="gerirUtilizadores.xhtml"/>
+                        <p:menuitem value="Lista de Utilizadores" outcome="homeUtilizadores.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="MATRICULAS">
+                        <p:menuitem value="Matricular Alunos" outcome="gerirMatriculas.xhtml"/>
+                        <p:menuitem value="Lista de Matriculas"/>
+                    </p:submenu>
+                    <p:submenu label="HOME/SAIR">
+                        <p:menuitem value="Menu Principal" action="#{loginController.votarMenuPrincipal()}"/>
+                        <p:menuitem value="SAIR" style="color: red" action="#{loginController.sair()}"/>
+                    </p:submenu>
+                </p:panelMenu>
+                
+            </p:layoutUnit>
+                
+         </p:layout>
+        </h:form>
+    </h:body>
+</html>
